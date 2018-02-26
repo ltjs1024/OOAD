@@ -6,13 +6,13 @@ package com.stone.guitar;
 public class Guitar {
     private final String serialNumber;
     private double price;
-    private final GurtarSpec gurtarSpec;
+    private final GuitarSpec guitarSpec;
 
 
-    public Guitar(String serialNumber, double price, GurtarSpec gurtarSpec) {
+    public Guitar(String serialNumber, double price, GuitarSpec guitarSpec) {
         this.serialNumber = serialNumber;
         this.price = price;
-        this.gurtarSpec = gurtarSpec;
+        this.guitarSpec = guitarSpec;
     }
 
 
@@ -28,8 +28,8 @@ public class Guitar {
         return price;
     }
 
-    public GurtarSpec getSpec() {
-        return gurtarSpec;
+    public GuitarSpec getSpec() {
+        return guitarSpec;
     }
 
     @Override
@@ -37,11 +37,11 @@ public class Guitar {
         return "Guitar{" +
                 "serialNumber='" + serialNumber + '\'' +
                 ", price=" + price +
-                ", builder='" + gurtarSpec.getBuilder() + '\'' +
-                ", model='" + gurtarSpec.getModel() + '\'' +
-                ", type='" + gurtarSpec.getType() + '\'' +
-                ", backWood='" + gurtarSpec.getBackWood() + '\'' +
-                ", topWood='" + gurtarSpec.getTopWood() + '\'' +
+                ", builder='" + guitarSpec.getBuilder() + '\'' +
+                ", model='" + guitarSpec.getModel() + '\'' +
+                ", type='" + guitarSpec.getType() + '\'' +
+                ", backWood='" + guitarSpec.getBackWood() + '\'' +
+                ", topWood='" + guitarSpec.getTopWood() + '\'' +
                 '}';
     }
 

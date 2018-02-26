@@ -20,10 +20,10 @@ public class Inventory {
      *
      * @param serialNumber
      * @param price
-     * @param gurtarSpec
+     * @param guitarSpec
      */
-    public void addGuitar(String serialNumber, double price,  GurtarSpec gurtarSpec) {
-        Guitar guitar = new Guitar(serialNumber, price,gurtarSpec);
+    public void addGuitar(String serialNumber, double price, GuitarSpec guitarSpec) {
+        Guitar guitar = new Guitar(serialNumber, price, guitarSpec);
         guitars.add(guitar);
     }
 
@@ -45,30 +45,16 @@ public class Inventory {
     /**
      * 搜索：接受客户的理想的吉他细节，从库存中匹配并返回所有符合客户规格的所有吉他
      *
-     * @param searchGuitar 客户的理想的吉他细节
+     * @param searchGuitarSpec 客户的理想的吉他细节
      * @return 返回符合客户规格的所有吉他
      */
-    public List<Guitar> search(Guitar searchGuitar) {
+    public List<Guitar> search(GuitarSpec searchGuitarSpec) {
         List<Guitar> result = new ArrayList<>();
         for (Guitar guitar : guitars) {
-            GurtarSpec spec = guitar.getSpec();
-            if (spec.getBuilder() != searchGuitar.getSpec().getBuilder()) {
-                continue;
+            GuitarSpec spec = guitar.getSpec();
+            if (spec.matches(searchGuitarSpec)) {
+                result.add(guitar);
             }
-            String model = guitar.getSpec().getModel();
-            if (model != null && !model.equals("") && !model.toLowerCase().equals(searchGuitar.getSpec().getModel().toLowerCase())) {
-                continue;
-            }
-            if (spec.getType() != searchGuitar.getSpec().getType()) {
-                continue;
-            }
-            if (spec.getBackWood() != searchGuitar.getSpec().getBackWood()) {
-                continue;
-            }
-            if (spec.getTopWood() != searchGuitar.getSpec().getTopWood()) {
-                continue;
-            }
-            result.add(guitar);
         }
         return result;
     }

@@ -3,14 +3,14 @@ package com.stone.guitar;
 /**
  * Gurtar一般特性
  */
-public class GurtarSpec {
+public class GuitarSpec {
     private final Builder builder;//制造商
     private final String model;//型号
     private final Type type;//类型
     private final Wood backWood;//back木料
     private final Wood topWood;//top木料
 
-    public GurtarSpec(Builder builder, String model, Type type, Wood backWood, Wood topWood) {
+    public GuitarSpec(Builder builder, String model, Type type, Wood backWood, Wood topWood) {
         this.builder = builder;
         this.model = model;
         this.type = type;
@@ -36,5 +36,25 @@ public class GurtarSpec {
 
     public Wood getTopWood() {
         return topWood;
+    }
+
+    public boolean matches(GuitarSpec otherSpec) {
+        if (builder != otherSpec.getBuilder()) {
+            return false;
+        }
+        if (type != otherSpec.getType()) {
+            return false;
+        }
+        if (backWood != otherSpec.backWood) {
+            return false;
+        }
+        if (topWood != otherSpec.topWood) {
+            return false;
+        }
+        if (model != null && !model.equals("") &&
+                !model.toLowerCase().equals(otherSpec.getModel().toLowerCase())) {
+            return false;
+        }
+        return true;
     }
 }

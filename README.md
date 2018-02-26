@@ -60,7 +60,15 @@ V1.3
     将Guitar一般特性(Builder、Model、Type、Wood)封装成GuitarSpec
 ```
 
-
+V1.4
+```java
+问题：
+    Guitar类与Inventory类耦合度高，当增加吉他特性时，需要同时修改GuitarSpec与Inventory类
+解决方案：
+    降低耦合度，
+思路：
+    Inventory的search(Guitar)将搜索工作委托给GuitarSpec类matches(GuitarSpec)
+```
 
 
 
