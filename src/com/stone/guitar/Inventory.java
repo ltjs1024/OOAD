@@ -20,15 +20,10 @@ public class Inventory {
      *
      * @param serialNumber
      * @param price
-     * @param builder
-     * @param model
-     * @param type
-     * @param backWood
-     * @param topWood
+     * @param gurtarSpec
      */
-    public void addGuitar(String serialNumber, double price, Builder builder, String model,
-                          Type type, Wood backWood, Wood topWood) {
-        Guitar guitar = new Guitar(serialNumber, price, builder, model, type, backWood, topWood);
+    public void addGuitar(String serialNumber, double price,  GurtarSpec gurtarSpec) {
+        Guitar guitar = new Guitar(serialNumber, price,gurtarSpec);
         guitars.add(guitar);
     }
 
@@ -56,20 +51,21 @@ public class Inventory {
     public List<Guitar> search(Guitar searchGuitar) {
         List<Guitar> result = new ArrayList<>();
         for (Guitar guitar : guitars) {
-            if (guitar.getBuilder() != searchGuitar.getBuilder()) {
+            GurtarSpec spec = guitar.getSpec();
+            if (spec.getBuilder() != searchGuitar.getSpec().getBuilder()) {
                 continue;
             }
-            String model = guitar.getModel();
-            if (model != null && !model.equals("") && !model.toLowerCase().equals(searchGuitar.getModel().toLowerCase())) {
+            String model = guitar.getSpec().getModel();
+            if (model != null && !model.equals("") && !model.toLowerCase().equals(searchGuitar.getSpec().getModel().toLowerCase())) {
                 continue;
             }
-            if (guitar.getType() != searchGuitar.getType()) {
+            if (spec.getType() != searchGuitar.getSpec().getType()) {
                 continue;
             }
-            if (guitar.getBackWood() != searchGuitar.getBackWood()) {
+            if (spec.getBackWood() != searchGuitar.getSpec().getBackWood()) {
                 continue;
             }
-            if (guitar.getTopWood() != searchGuitar.getTopWood()) {
+            if (spec.getTopWood() != searchGuitar.getSpec().getTopWood()) {
                 continue;
             }
             result.add(guitar);

@@ -50,6 +50,15 @@ V1.2
     返回结果改成列表(List)
 ```
 
+V1.3
+```java
+问题：
+    Guitar类构造方法参数过多
+解决方案：
+    Guitar参数(一般特性)封装成对象
+思路：
+    将Guitar一般特性(Builder、Model、Type、Wood)封装成GuitarSpec
+```
 
 
 

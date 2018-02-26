@@ -18,12 +18,12 @@ public class GuitarTest {
     }
 
     private static void initializeInventory(Inventory inventory) {
-        inventory.addGuitar("V3721", 1599.95, Builder.GIBSON,
-                "Gibson", Type.ACOUSTIC, Wood.BRAZILIAN_ROSEWOOD, Wood.BRAZILIAN_ROSEWOOD);
-        inventory.addGuitar("V95693", 1499.95, Builder.FENDER,
-                "Stratocastor", Type.ELECTRIC, Wood.ALDER, Wood.ALDER);
-        inventory.addGuitar("V9512", 1549.95, Builder.FENDER,
-                "Stratocastor", Type.ELECTRIC, Wood.ALDER, Wood.ALDER);
+        inventory.addGuitar("V3721", 1599.95, new GurtarSpec(Builder.GIBSON,
+                "Gibson", Type.ACOUSTIC, Wood.BRAZILIAN_ROSEWOOD, Wood.BRAZILIAN_ROSEWOOD));
+        inventory.addGuitar("V95693", 1499.95, new GurtarSpec(Builder.FENDER,
+                "Stratocastor", Type.ELECTRIC, Wood.ALDER, Wood.ALDER));
+        inventory.addGuitar("V9512", 1549.95, new GurtarSpec(Builder.FENDER,
+                "Stratocastor", Type.ELECTRIC, Wood.ALDER, Wood.ALDER));
     }
 
     @AfterClass
@@ -38,8 +38,8 @@ public class GuitarTest {
      */
     @Test
     public void testSearchOnly() throws Exception {
-        Guitar searchGuitar = new Guitar("", 0, Builder.GIBSON,
-                "Gibson", Type.ACOUSTIC, Wood.BRAZILIAN_ROSEWOOD, Wood.BRAZILIAN_ROSEWOOD);
+        Guitar searchGuitar = new Guitar("", 0, new GurtarSpec(Builder.GIBSON,
+                "Gibson", Type.ACOUSTIC, Wood.BRAZILIAN_ROSEWOOD, Wood.BRAZILIAN_ROSEWOOD));
         List<Guitar> searchGuitars = guitars.search(searchGuitar);
         String expected = "[Guitar{serialNumber='V3721', price=1599.95, builder='Gibson', model='Gibson', type='Acoustic', backWood='Brazilian Rosewood', topWood='Brazilian Rosewood'}]";
         Assert.assertEquals(expected, searchGuitars.toString());
@@ -52,8 +52,8 @@ public class GuitarTest {
      */
     @Test
     public void testSearchMultis() throws Exception {
-        Guitar searchGuitar = new Guitar("", 0, Builder.FENDER,
-                "Stratocastor", Type.ELECTRIC, Wood.ALDER, Wood.ALDER);
+        Guitar searchGuitar = new Guitar("", 0, new GurtarSpec(Builder.FENDER,
+                "Stratocastor", Type.ELECTRIC, Wood.ALDER, Wood.ALDER));
         List<Guitar> result = guitars.search(searchGuitar);
         String expected = "[Guitar{serialNumber='V95693', price=1499.95, builder='Fender', model='Stratocastor', type='Electric', backWood='Alder', topWood='Alder'}," +
                 " Guitar{serialNumber='V9512', price=1549.95, builder='Fender', model='Stratocastor', type='Electric', backWood='Alder', topWood='Alder'}]";
@@ -67,8 +67,8 @@ public class GuitarTest {
      */
     @Test
     public void testSearchNotExist() throws Exception {
-        Guitar searchGuitar = new Guitar("", 0, Builder.ANY,
-                "Stratocastor", Type.ELECTRIC, Wood.ALDER, Wood.ALDER);
+        Guitar searchGuitar = new Guitar("", 0, new GurtarSpec(Builder.ANY,
+                "Stratocastor", Type.ELECTRIC, Wood.ALDER, Wood.ALDER));
         List<Guitar> search = guitars.search(searchGuitar);
         String expected = "[]";
         Assert.assertEquals(expected, search.toString());

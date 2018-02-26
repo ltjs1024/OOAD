@@ -5,24 +5,14 @@ package com.stone.guitar;
  */
 public class Guitar {
     private final String serialNumber;
-    private  double price;
-    private final Builder builder;
-    private final String model;
-    private final Type type;
-    private final Wood backWood;
-    private final Wood topWood;
+    private double price;
+    private final GurtarSpec gurtarSpec;
 
 
-
-    public Guitar(String serialNumber, double price, Builder builder, String model,
-                  Type type, Wood backWood, Wood topWood) {
+    public Guitar(String serialNumber, double price, GurtarSpec gurtarSpec) {
         this.serialNumber = serialNumber;
         this.price = price;
-        this.builder = builder;
-        this.model = model;
-        this.type = type;
-        this.backWood = backWood;
-        this.topWood = topWood;
+        this.gurtarSpec = gurtarSpec;
     }
 
 
@@ -38,24 +28,8 @@ public class Guitar {
         return price;
     }
 
-    public Builder getBuilder() {
-        return builder;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public Type getType() {
-        return type;
-    }
-
-    public Wood getBackWood() {
-        return backWood;
-    }
-
-    public Wood getTopWood() {
-        return topWood;
+    public GurtarSpec getSpec() {
+        return gurtarSpec;
     }
 
     @Override
@@ -63,11 +37,11 @@ public class Guitar {
         return "Guitar{" +
                 "serialNumber='" + serialNumber + '\'' +
                 ", price=" + price +
-                ", builder='" + builder + '\'' +
-                ", model='" + model + '\'' +
-                ", type='" + type + '\'' +
-                ", backWood='" + backWood + '\'' +
-                ", topWood='" + topWood + '\'' +
+                ", builder='" + gurtarSpec.getBuilder() + '\'' +
+                ", model='" + gurtarSpec.getModel() + '\'' +
+                ", type='" + gurtarSpec.getType() + '\'' +
+                ", backWood='" + gurtarSpec.getBackWood() + '\'' +
+                ", topWood='" + gurtarSpec.getTopWood() + '\'' +
                 '}';
     }
 
