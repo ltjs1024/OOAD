@@ -48,12 +48,13 @@ public class Inventory {
     }
 
     /**
-     * 搜索：接受客户的理想的吉他细节，从库存中匹配并返回吉他对象
+     * 搜索：接受客户的理想的吉他细节，从库存中匹配并返回所有符合客户规格的所有吉他
      *
      * @param searchGuitar 客户的理想的吉他细节
-     * @return 返回库存中匹配的吉他对象， 没有匹配到则返回null
+     * @return 返回符合客户规格的所有吉他
      */
-    public Guitar search(Guitar searchGuitar) {
+    public List<Guitar> search(Guitar searchGuitar) {
+        List<Guitar> result = new ArrayList<>();
         for (Guitar guitar : guitars) {
             if (guitar.getBuilder() != searchGuitar.getBuilder()) {
                 continue;
@@ -71,8 +72,8 @@ public class Inventory {
             if (guitar.getTopWood() != searchGuitar.getTopWood()) {
                 continue;
             }
-            return guitar;
+            result.add(guitar);
         }
-        return null;
+        return result;
     }
 }
