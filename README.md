@@ -27,7 +27,18 @@ getGuitar(String):Guitar
 search(Guitar):Guitar
 ```
 
-
+V1.1
+```java
+问题：
+    search(Guitar)接受客户的吉他参数，容易出现参数大小写、单词拼写错误问题
+解决方案：
+    使用SString.toLowerCase()方法，能避免参数大小写问题，对于单词拼写错误无能为力
+    使用枚举，限制参数的可能值，可以有效避免参数拼写错误问题
+思路：
+    吉他制造商(Builder)、类型(Type)、木材材料(Wood)使用枚举
+    吉他型号不固定，不能使用枚举
+    吉他序列号、价格也不能使用枚举
+```
 
 
 

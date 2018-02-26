@@ -17,10 +17,10 @@ public class GuitarTest {
 
     private static void initializeInventory(Inventory inventory) {
 
-        inventory.addGuitar("V95693", 1499.95, "Fender",
-                "Stratocastor", "electric", "Alder", "Alder");
-        inventory.addGuitar("V9512", 1549.95, "Fender",
-                "Stratocastor", "electric", "Alder", "Alder");
+        inventory.addGuitar("V95693", 1499.95, Builder.FENDER,
+                "Stratocastor", Type.ELECTRIC, Wood.ALDER, Wood.ALDER);
+        inventory.addGuitar("V9512", 1549.95, Builder.FENDER,
+                "Stratocastor", Type.ELECTRIC, Wood.ALDER, Wood.ALDER);
     }
 
     @AfterClass
@@ -33,10 +33,10 @@ public class GuitarTest {
      */
     @Test
     public void testSearch() throws Exception {
-        Guitar searchGuitar = new Guitar("", 0, "Fender",
-                "Stratocastor", "electric", "Alder", "Alder");
+        Guitar searchGuitar = new Guitar("", 0, Builder.FENDER,
+                "Stratocastor", Type.ELECTRIC, Wood.ALDER, Wood.ALDER);
         Guitar search = guitars.search(searchGuitar);
-        String expected = "Guitar{serialNumber='V95693', price=1499.95, builder='Fender', model='Stratocastor', type='electric', backWood='Alder', topWood='Alder'}";
+        String expected = "Guitar{serialNumber='V95693', price=1499.95, builder='Fender', model='Stratocastor', type='Electric', backWood='Alder', topWood='Alder'}";
         Assert.assertEquals(expected, search.toString());
     }
 
@@ -45,8 +45,8 @@ public class GuitarTest {
      */
     @Test
     public void testSearchNotExist() throws Exception {
-        Guitar searchGuitar = new Guitar("", 0, "Any",
-                "Stratocastor", "electric", "Alder", "Alder");
+        Guitar searchGuitar = new Guitar("", 0, Builder.ANY,
+                "Stratocastor", Type.ELECTRIC, Wood.ALDER, Wood.ALDER);
         Guitar search = guitars.search(searchGuitar);
         String expected = null;
         Assert.assertEquals(expected, search == null ? null : search.toString());

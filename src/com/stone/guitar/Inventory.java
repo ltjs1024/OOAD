@@ -3,7 +3,12 @@ package com.stone.guitar;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 吉他库存类
+ */
+
 public class Inventory {
+    // 库存列表
     private final List<Guitar> guitars;
 
     public Inventory() {
@@ -21,8 +26,8 @@ public class Inventory {
      * @param backWood
      * @param topWood
      */
-    public void addGuitar(String serialNumber, double price, String builder, String model,
-                          String type, String backWood, String topWood) {
+    public void addGuitar(String serialNumber, double price, Builder builder, String model,
+                          Type type, Wood backWood, Wood topWood) {
         Guitar guitar = new Guitar(serialNumber, price, builder, model, type, backWood, topWood);
         guitars.add(guitar);
     }
@@ -50,24 +55,20 @@ public class Inventory {
      */
     public Guitar search(Guitar searchGuitar) {
         for (Guitar guitar : guitars) {
-            String builder = guitar.getBuilder();
-            if (builder != null && !builder.equals("") && !builder.equals(searchGuitar.getBuilder())) {
+            if (guitar.getBuilder() != searchGuitar.getBuilder()) {
                 continue;
             }
             String model = guitar.getModel();
-            if (model != null && !model.equals("") && !model.equals(searchGuitar.getModel())) {
+            if (model != null && !model.equals("") && !model.toLowerCase().equals(searchGuitar.getModel().toLowerCase())) {
                 continue;
             }
-            String type = guitar.getType();
-            if (type != null && !type.equals("") && !type.equals(searchGuitar.getType())) {
+            if (guitar.getType() != searchGuitar.getType()) {
                 continue;
             }
-            String backWood = guitar.getBackWood();
-            if (backWood != null && !backWood.equals("") && !backWood.equals(searchGuitar.getBackWood())) {
+            if (guitar.getBackWood() != searchGuitar.getBackWood()) {
                 continue;
             }
-            String topWood = guitar.getTopWood();
-            if (topWood != null && !topWood.equals("") && !topWood.equals(searchGuitar.getTopWood())) {
+            if (guitar.getTopWood() != searchGuitar.getTopWood()) {
                 continue;
             }
             return guitar;

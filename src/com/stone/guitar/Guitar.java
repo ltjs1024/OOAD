@@ -1,18 +1,21 @@
 package com.stone.guitar;
 
+/**
+ * 吉他
+ */
 public class Guitar {
     private final String serialNumber;
     private  double price;
-    private final String builder;
+    private final Builder builder;
     private final String model;
-    private final String type;
-    private final String backWood;
-    private final String topWood;
+    private final Type type;
+    private final Wood backWood;
+    private final Wood topWood;
 
 
 
-    public Guitar(String serialNumber, double price, String builder, String model,
-                  String type, String backWood, String topWood) {
+    public Guitar(String serialNumber, double price, Builder builder, String model,
+                  Type type, Wood backWood, Wood topWood) {
         this.serialNumber = serialNumber;
         this.price = price;
         this.builder = builder;
@@ -35,7 +38,7 @@ public class Guitar {
         return price;
     }
 
-    public String getBuilder() {
+    public Builder getBuilder() {
         return builder;
     }
 
@@ -43,15 +46,15 @@ public class Guitar {
         return model;
     }
 
-    public String getType() {
+    public Type getType() {
         return type;
     }
 
-    public String getBackWood() {
+    public Wood getBackWood() {
         return backWood;
     }
 
-    public String getTopWood() {
+    public Wood getTopWood() {
         return topWood;
     }
 
