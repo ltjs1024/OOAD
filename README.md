@@ -32,7 +32,7 @@ V1.1
 问题：
     search(Guitar)接受客户的吉他参数，容易出现参数大小写、单词拼写错误问题
 解决方案：
-    使用SString.toLowerCase()方法，能避免参数大小写问题，对于单词拼写错误无能为力
+    使用String.toLowerCase()方法，能避免参数大小写问题，对于单词拼写错误无能为力
     使用枚举，限制参数的可能值，可以有效避免参数拼写错误问题
 思路：
     吉他制造商(Builder)、类型(Type)、木材材料(Wood)使用枚举
@@ -65,10 +65,58 @@ V1.4
 问题：
     Guitar类与Inventory类耦合度高，当增加吉他特性时，需要同时修改GuitarSpec与Inventory类
 解决方案：
-    降低耦合度，
+    降低耦合度，委托
 思路：
     Inventory的search(Guitar)将搜索工作委托给GuitarSpec类matches(GuitarSpec)
 ```
 
+V1.5
+```java
+问题：
+    为曼陀林(Mandolin)添加搜索功能
+解决方案：
+    直接在Inventory类中添加一个列表，用来存储Mandolin，相关的逻辑重新实现一遍，会造成代码的重复
+    把Guitar和Mandolin共性抽取到一个基类(抽象类)中
+思路：
+    1.新建Instrument、InstrumentSpec抽象类
+        Instrument:
+            serialNumber:序列号
+            price:价格
+            getSpec():InstrumentSpec
+
+        InstrumentSpec:
+            builder:制造商
+            model:型号
+            type:类型（原声吉他、电吉他）
+            backWood:木料
+            topWood:木料
+            matches(InstrumentSpec):boolean
+
+    2.Guitar、Mandolin继承自Instrument,并重写getSpec()方法
+      Guitar:
+        getSpec():GuitarSpec
+      Mandolin:
+        getSpec():MandolinSpec
+
+    3.GuitarSpec、MandolinSpec继承自InstrumentSpec，并重写matches(InstrumentSpec)方法
+      GuitarSpec:
+        numStrings:int
+        matches(InstrumentSpec):boolean
+
+      MandolinSpec:
+        style:Style  //枚举类
+        matches(InstrumentSpec):boolean
+
+      Style:
+        A,F;
+        toString()
+
+    4.Inventory中新增search(MandolinSpec)方法，用于搜索Mandolin
+        search(MandolinSpec): List<Mandolin>
+
+    5.修改相关测试类
+
+
+```
 
 

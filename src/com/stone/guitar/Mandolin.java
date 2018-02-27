@@ -1,29 +1,26 @@
 package com.stone.guitar;
 
 /**
- * 吉他
+ * 曼陀林
  */
-public class Guitar extends Instrument {
+public class Mandolin extends Instrument {
 
-
-    public Guitar(String serialNumber, double price, GuitarSpec guitarSpec) {
-        super(serialNumber, price, guitarSpec);
+    public Mandolin(String serialNumber, double price, MandolinSpec mandolinSpec) {
+        super(serialNumber, price, mandolinSpec);
     }
-
 
     @Override
     public String toString() {
-        GuitarSpec spec = (GuitarSpec) getSpec();
-        return "Guitar{" +
+        MandolinSpec spec = (MandolinSpec) getSpec();
+        return "Mandolin{" +
                 "serialNumber='" + getSerialNumber() + '\'' +
                 ", price=" + getPrice() +
                 ", builder='" + spec.getBuilder() + '\'' +
                 ", model='" + spec.getModel() + '\'' +
                 ", type='" + spec.getType() + '\'' +
-                ", numStrings='" + spec.getNumStrings() + '\'' +
                 ", backWood='" + spec.getBackWood() + '\'' +
                 ", topWood='" + spec.getTopWood() + '\'' +
+                ", style='" + spec.getStyle() + '\'' +
                 '}';
     }
-
 }

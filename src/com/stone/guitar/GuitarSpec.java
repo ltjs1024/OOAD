@@ -1,58 +1,32 @@
 package com.stone.guitar;
 
 /**
- * Gurtar一般特性
+ * Gurtar特性
  */
-public class GuitarSpec {
-    private final Builder builder;//制造商
-    private final String model;//型号
-    private final Type type;//类型
-    private final Wood backWood;//back木料
-    private final Wood topWood;//top木料
+public class GuitarSpec extends InstrumentSpec {
+    private final int numStrings;//弦数
 
-    public GuitarSpec(Builder builder, String model, Type type, Wood backWood, Wood topWood) {
-        this.builder = builder;
-        this.model = model;
-        this.type = type;
-        this.backWood = backWood;
-        this.topWood = topWood;
+
+    public GuitarSpec(Builder builder, String model, Type type,
+                      int numStrings, Wood backWood, Wood topWood) {
+        super(builder, model, type, backWood, topWood);
+        this.numStrings = numStrings;
     }
 
-    public Builder getBuilder() {
-        return builder;
+    public int getNumStrings() {
+        return numStrings;
     }
 
-    public String getModel() {
-        return model;
-    }
-
-    public Type getType() {
-        return type;
-    }
-
-    public Wood getBackWood() {
-        return backWood;
-    }
-
-    public Wood getTopWood() {
-        return topWood;
-    }
-
-    public boolean matches(GuitarSpec otherSpec) {
-        if (builder != otherSpec.getBuilder()) {
+    @Override
+    public boolean matches(InstrumentSpec otherSpec) {
+        if (!super.matches(otherSpec)) {
             return false;
         }
-        if (type != otherSpec.getType()) {
+        if (!(otherSpec instanceof GuitarSpec)) {
             return false;
         }
-        if (backWood != otherSpec.backWood) {
-            return false;
-        }
-        if (topWood != otherSpec.topWood) {
-            return false;
-        }
-        if (model != null && !model.equals("") &&
-                !model.toLowerCase().equals(otherSpec.getModel().toLowerCase())) {
+        GuitarSpec spec = (GuitarSpec) otherSpec;
+        if (numStrings != spec.numStrings) {
             return false;
         }
         return true;

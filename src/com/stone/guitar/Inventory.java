@@ -9,34 +9,39 @@ import java.util.List;
 
 public class Inventory {
     // 库存列表
-    private final List<Guitar> guitars;
+    private final List<Instrument> instruments;
 
     public Inventory() {
-        this.guitars = new ArrayList<>();
+        this.instruments = new ArrayList<>();
     }
 
     /**
-     * 添加：根据吉他参数，创建吉他对象，并将其加入库存中
+     * 添加：根据乐器参数，创建乐器对象，并将其加入库存中
      *
      * @param serialNumber
      * @param price
-     * @param guitarSpec
+     * @param instrumentSpec
      */
-    public void addGuitar(String serialNumber, double price, GuitarSpec guitarSpec) {
-        Guitar guitar = new Guitar(serialNumber, price, guitarSpec);
-        guitars.add(guitar);
+    public void addInstrument(String serialNumber, double price, InstrumentSpec instrumentSpec) {
+        Instrument instrument = null;
+        if (instrumentSpec instanceof GuitarSpec) {
+            instrument = new Guitar(serialNumber, price, (GuitarSpec) instrumentSpec);
+        } else if (instrumentSpec instanceof MandolinSpec) {
+            instrument = new Mandolin(serialNumber, price, (MandolinSpec) instrumentSpec);
+        }
+        instruments.add(instrument);
     }
 
     /**
-     * 接受吉他序号，返回该吉他的对象
+     * 接受乐器序列号，返回该乐器的对象
      *
-     * @param serialNumber 吉他序列号
-     * @return 返回库存中匹配的吉他对象，没有匹配到则返回null
+     * @param serialNumber 乐器序列号
+     * @return 返回库存中匹配的乐器对象，没有匹配到则返回null
      */
-    public Guitar getGuitar(String serialNumber) {
-        for (Guitar guitar : guitars) {
-            if (guitar.getSerialNumber().equals(serialNumber)) {
-                return guitar;
+    public Instrument getInstrument(String serialNumber) {
+        for (Instrument instrument : instruments) {
+            if (instrument.getSerialNumber().equals(serialNumber)) {
+                return instrument;
             }
         }
         return null;
@@ -45,15 +50,30 @@ public class Inventory {
     /**
      * 搜索：接受客户的理想的吉他细节，从库存中匹配并返回所有符合客户规格的所有吉他
      *
-     * @param searchGuitarSpec 客户的理想的吉他细节
+     * @param searchSpec 客户的理想的吉他细节
      * @return 返回符合客户规格的所有吉他
      */
-    public List<Guitar> search(GuitarSpec searchGuitarSpec) {
+    public List<Guitar> search(GuitarSpec searchSpec) {
         List<Guitar> result = new ArrayList<>();
-        for (Guitar guitar : guitars) {
-            GuitarSpec spec = guitar.getSpec();
-            if (spec.matches(searchGuitarSpec)) {
-                result.add(guitar);
+        for (Instrument instrument : instruments) {
+            if (searchSpec.matches(instrument.getSpec())) {
+                result.add((Guitar) instrument);
+            }
+        }
+        return result;
+    }
+
+    /**
+     * 搜索：接受客户的理想的Mandolin细节，从库存中匹配并返回所有符合客户规格的所有Mandolin
+     *
+     * @param searchSpec 客户的理想的Mandolin细节
+     * @return 返回符合客户规格的所有Mandolin
+     */
+    public List<Mandolin> search(MandolinSpec searchSpec) {
+        List<Mandolin> result = new ArrayList<>();
+        for (Instrument instrument : instruments) {
+            if (searchSpec.matches(instrument.getSpec())) {
+                result.add((Mandolin) instrument);
             }
         }
         return result;
