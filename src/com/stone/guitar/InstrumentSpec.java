@@ -1,61 +1,51 @@
 package com.stone.guitar;
 
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 /**
  * 乐器一般特性
  */
-public abstract class InstrumentSpec {
-    private final Builder builder;//制造商
-    private final String model;//型号
-    private final Type type;//类型
-    private final Wood backWood;//back木料
-    private final Wood topWood;//top木料
+public class InstrumentSpec {
+    private Map<String, Object> properties = null;
 
-    public InstrumentSpec(Builder builder, String model, Type type, Wood backWood, Wood topWood) {
-        this.builder = builder;
-        this.model = model;
-        this.type = type;
-        this.backWood = backWood;
-        this.topWood = topWood;
+    public InstrumentSpec(Map<String, Object> properties) {
+        if (properties == null) {
+            this.properties = new LinkedHashMap<>();
+        } else {
+            this.properties = new LinkedHashMap<>(properties);
+        }
     }
 
-    public Builder getBuilder() {
-        return builder;
+    public Map<String, Object> getProperties() {
+        return properties;
     }
 
-    public String getModel() {
-        return model;
-    }
-
-    public Type getType() {
-        return type;
-    }
-
-    public Wood getBackWood() {
-        return backWood;
-    }
-
-    public Wood getTopWood() {
-        return topWood;
+    public Object getProperty(String propertyName) {
+        return properties.get(propertyName);
     }
 
 
     public boolean matches(InstrumentSpec otherSpec) {
-        if (builder != otherSpec.getBuilder()) {
-            return false;
-        }
-        if (type != otherSpec.getType()) {
-            return false;
-        }
-        if (backWood != otherSpec.backWood) {
-            return false;
-        }
-        if (topWood != otherSpec.topWood) {
-            return false;
-        }
-        if (model != null && !model.equals("") &&
-                !model.toLowerCase().equals(otherSpec.getModel().toLowerCase())) {
-            return false;
+        for (Iterator i = otherSpec.getProperties().keySet().iterator(); i.hasNext(); ) {
+            String propertyName = (String) i.next();
+            if (!otherSpec.getProperty(propertyName).equals(properties.get(propertyName))) {
+                return false;
+            }
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (Iterator i = properties.keySet().iterator(); i.hasNext(); ) {
+            String propertyName = (String) i.next();
+            sb.append(" ");
+            sb.append(propertyName).append("='");
+            sb.append(properties.get(propertyName)).append("',");
+        }
+        return sb.toString().substring(0, sb.toString().length() - 1);
     }
 }

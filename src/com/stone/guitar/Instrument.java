@@ -2,9 +2,11 @@ package com.stone.guitar;
 
 
 /**
- * 乐器抽象类
+ * 乐器类
  */
-public abstract class Instrument {
+public  class Instrument {
+
+
 
     private final String serialNumber;
     private double price;
@@ -31,6 +33,15 @@ public abstract class Instrument {
 
     public InstrumentSpec getSpec() {
         return instrumentSpec;
+    }
+
+    @Override
+    public String toString() {
+        return "Instrument{" +
+                "serialNumber='" + serialNumber + '\'' +
+                ", price=" + price +
+                "," + instrumentSpec.toString() +
+                '}';
     }
 
 }

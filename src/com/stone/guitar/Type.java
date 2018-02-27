@@ -1,7 +1,7 @@
 package com.stone.guitar;
 
 /**
- * 吉他类型：
+ * 乐器类型：
  *      原声吉他
  *      电吉他
  */

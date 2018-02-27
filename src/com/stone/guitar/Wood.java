@@ -1,7 +1,7 @@
 package com.stone.guitar;
 
 /**
- * 吉他木材材料
+ * 乐器木材材料
  */
 public enum Wood {
     INDIAN_ROSEWOOD, BRAZILIAN_ROSEWOOD, MAHOGANY, MAPLE, COCOBOLO, CEDAR, ADIRONDACK, ALDER, SITKA;

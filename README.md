@@ -57,7 +57,7 @@ V1.3
 解决方案：
     Guitar参数(一般特性)封装成对象
 思路：
-    将Guitar一般特性(Builder、Model、Type、Wood)封装成GuitarSpec
+    将Guitar一般特性(Builder、Model、Type、Wood)封装成GuitarSpec对象
 ```
 
 V1.4
@@ -72,10 +72,10 @@ V1.4
 
 V1.5
 ```java
-问题：
+需求：
     为曼陀林(Mandolin)添加搜索功能
 解决方案：
-    直接在Inventory类中添加一个列表，用来存储Mandolin，相关的逻辑重新实现一遍，会造成代码的重复
+    直接在Inventory类中添加一个列表，用来存储Mandolin，相关的逻辑重新实现一遍，会造成代码的重复。
     把Guitar和Mandolin共性抽取到一个基类(抽象类)中
 思路：
     1.新建Instrument、InstrumentSpec抽象类
@@ -114,9 +114,41 @@ V1.5
     4.Inventory中新增search(MandolinSpec)方法，用于搜索Mandolin
         search(MandolinSpec): List<Mandolin>
 
-    5.修改相关测试类
+    5.修改测试用例，并运行通过。
 
 
 ```
 
+V1.6
+```java
+需求：
+    为更多的乐器(Banjo、Dobro、Bass、Fiddle...)添加搜索功能
 
+解决方案：
+    让这些乐器分别继承Instrument，并分别创建各自的规格对象，显然是不可取的：
+        1.导致大量的子类；
+        2.每新增一种乐器，都需要修改Instrument类中的addInstrument(String,double,InstrumentSpec)方法，增加判断语句；
+        3.新增search(BanjoSpec)、search(DobroSpec)...
+
+    运用OO原则，让应用更具灵活性
+        1.将变化之物封装起来；
+        2.对接口编码，而不是对实现；
+        3.应用程序中的每一个类只有一个改变的理由。(SRP)
+
+思路：
+    1.Instrument类变成非抽象类：
+        serialNumber: String
+        price: double
+        getSpec(): InstrumentSpec
+    2.InstrumentSpec类封装每种乐器的不同特性
+        properties: Map
+        getProperty(String): Object
+        getProperties(): Map
+        matches(InstrumentSpec): boolean
+    3.去掉子类(Guitar、Mandolin、Banjo...)，及相关特性类(GuitarSpec、MandolinSpec、BanjoSpec...)
+    4.新增枚举类InstrumentType:代表各种具体乐器
+    5.修改Inventory类搜索方法：
+        search(InstrumentSpec): List<Instrument>
+    6.修改相关测试用例，运行通过。
+
+```

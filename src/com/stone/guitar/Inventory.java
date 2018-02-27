@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 吉他库存类
+ * 乐器库存类
  */
 
 public class Inventory {
@@ -23,12 +23,7 @@ public class Inventory {
      * @param instrumentSpec
      */
     public void addInstrument(String serialNumber, double price, InstrumentSpec instrumentSpec) {
-        Instrument instrument = null;
-        if (instrumentSpec instanceof GuitarSpec) {
-            instrument = new Guitar(serialNumber, price, (GuitarSpec) instrumentSpec);
-        } else if (instrumentSpec instanceof MandolinSpec) {
-            instrument = new Mandolin(serialNumber, price, (MandolinSpec) instrumentSpec);
-        }
+        Instrument instrument = new Instrument(serialNumber, price, instrumentSpec);
         instruments.add(instrument);
     }
 
@@ -48,34 +43,20 @@ public class Inventory {
     }
 
     /**
-     * 搜索：接受客户的理想的吉他细节，从库存中匹配并返回所有符合客户规格的所有吉他
+     * 搜索：接受客户的理想的乐器规格，从库存中匹配并返回所有符合客户规格的所有乐器
      *
-     * @param searchSpec 客户的理想的吉他细节
-     * @return 返回符合客户规格的所有吉他
+     * @param searchSpec 客户的理想的乐器规格
+     * @return 返回符合客户规格的所有乐器
      */
-    public List<Guitar> search(GuitarSpec searchSpec) {
-        List<Guitar> result = new ArrayList<>();
+    public List<Instrument> search(InstrumentSpec searchSpec) {
+        List<Instrument> result = new ArrayList<>();
         for (Instrument instrument : instruments) {
-            if (searchSpec.matches(instrument.getSpec())) {
-                result.add((Guitar) instrument);
+            if (instrument.getSpec().matches(searchSpec)) {
+                result.add(instrument);
             }
         }
         return result;
     }
 
-    /**
-     * 搜索：接受客户的理想的Mandolin细节，从库存中匹配并返回所有符合客户规格的所有Mandolin
-     *
-     * @param searchSpec 客户的理想的Mandolin细节
-     * @return 返回符合客户规格的所有Mandolin
-     */
-    public List<Mandolin> search(MandolinSpec searchSpec) {
-        List<Mandolin> result = new ArrayList<>();
-        for (Instrument instrument : instruments) {
-            if (searchSpec.matches(instrument.getSpec())) {
-                result.add((Mandolin) instrument);
-            }
-        }
-        return result;
-    }
+
 }
