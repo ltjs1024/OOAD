@@ -1,5 +1,8 @@
 package com.stone.dog;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 /**
  * 遥控器
  */
@@ -15,8 +18,17 @@ public class Remote {
         System.out.println("Pressing the remote control button...");
         if (dogDoor.isOpen()) {
             dogDoor.close();
-        }else {
+        } else {
             dogDoor.open();
+            // 5秒后自动关门
+            final Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    dogDoor.close();
+                    timer.cancel();
+                }
+            }, 5000);
         }
 
     }
