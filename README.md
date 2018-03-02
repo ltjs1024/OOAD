@@ -1,10 +1,12 @@
 # OOAD
 深入浅出面向对象分析与设计 学习笔记 代码
 
-V1.0
+******************************
 
 Guitar:吉他
 
+
+V1.0
 ```java
 serialNumber:序列号
 price:价格
@@ -27,6 +29,7 @@ getGuitar(String):Guitar
 search(Guitar):Guitar
 ```
 
+
 V1.1
 ```java
 问题：
@@ -39,6 +42,7 @@ V1.1
     吉他型号不固定，不能使用枚举
     吉他序列号、价格也不能使用枚举
 ```
+
 
 V1.2
 ```java
@@ -60,6 +64,7 @@ V1.3
     将Guitar一般特性(Builder、Model、Type、Wood)封装成GuitarSpec对象
 ```
 
+
 V1.4
 ```java
 问题：
@@ -69,6 +74,7 @@ V1.4
 思路：
     Inventory的search(Guitar)将搜索工作委托给GuitarSpec类matches(GuitarSpec)
 ```
+
 
 V1.5
 ```java
@@ -152,3 +158,20 @@ V1.6
     6.修改相关测试用例，运行通过。
 
 ```
+
+
+******************************
+超棒狗门
+
+V1.0
+```java
+    DogDoor: 扮演与狗门硬件之间的接口
+        open: boolean
+        open(): void
+        close(): void
+    Remote: 遥控器（操控狗门）
+        dogDoor: DogDoor
+        pressButton(): void
+
+```
+
