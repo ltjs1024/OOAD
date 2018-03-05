@@ -6,26 +6,30 @@ package com.stone.dog;
  */
 public class DogDoorSimulator {
 
-    public static void main(String[] args) {
-        DogDoor dogDoor = new DogDoor();
-        Remote remote = new Remote(dogDoor);
 
-        System.out.println("Fido barks to go outside...");
-        remote.pressButton();
+    public static void main(String[] args) {
+        DogDoor door = new DogDoor();
+        BarkReconnizer barkReconnizer = new BarkReconnizer(door);
+        Remote remote = new Remote(door);
+
+        // Simulate the hardware hearing a bark
+        System.out.println("Fido starts barking.");
+        barkReconnizer.recongnize("Woof");
 
         System.out.println("\nFido has gone outside...");
         System.out.println("\nFido's all done...");
 
         try {
-            Thread.currentThread().sleep(10000);
-        } catch (Exception e) {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
         System.out.println("...but he's stuck outside!");
+
+        // Simulate the hardware hearing a bark again.
         System.out.println("\nFido starts barking...");
-        System.out.println("...so Gina grabs the remote control.");
-        remote.pressButton();
+        barkReconnizer.recongnize("Woof");
         System.out.println("\nFido's back inside...");
 
 

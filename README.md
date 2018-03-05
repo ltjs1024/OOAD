@@ -187,3 +187,14 @@ V1.2
 处理：
     替换路径
 ```
+
+V1.3
+```java
+问题：
+    叫声自动识别器
+处理：
+    BarkRecongnizer:
+        door: DogDoor
+        recongnize(String): void
+
+```
