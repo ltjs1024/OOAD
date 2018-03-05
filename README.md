@@ -206,3 +206,20 @@ V1.4
 处理：
     将自动关闭狗门功能从Remote中取出，放入DogDoor的open()方法中
 ```
+
+
+V1.5
+```java
+问题：
+    叫声识别器只允许打开指定叫声的狗门
+处理：
+    Bark:
+        sound: String
+        重写equals(Object)方法
+    DogDoor:
+        allowedBarks: List<Bark>, 用来存储狗狗的叫声
+        addAllowedBark(Bark): 添加
+        getAllowedBarks(): List<Bark>
+    BarkRecognizer:
+        修改recongnize(Bark)方法
+```

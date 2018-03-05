@@ -9,12 +9,15 @@ public class DogDoorSimulator {
 
     public static void main(String[] args) {
         DogDoor door = new DogDoor();
-        BarkReconnizer barkReconnizer = new BarkReconnizer(door);
+        door.addAllowedBark(new Bark("woof"));
+        door.addAllowedBark(new Bark("wowo"));
+        BarkRecognizer barkReconnizer = new BarkRecognizer(door);
         Remote remote = new Remote(door);
 
         // Simulate the hardware hearing a bark
         System.out.println("Fido starts barking.");
-        barkReconnizer.recongnize("Woof");
+        Bark woof = new Bark("Woof");
+        barkReconnizer.recongnize(woof);
 
         System.out.println("\nFido has gone outside...");
         System.out.println("\nFido's all done...");
@@ -29,7 +32,7 @@ public class DogDoorSimulator {
 
         // Simulate the hardware hearing a bark again.
         System.out.println("\nFido starts barking...");
-        barkReconnizer.recongnize("Woof");
+        barkReconnizer.recongnize(woof);
         System.out.println("\nFido's back inside...");
 
 
