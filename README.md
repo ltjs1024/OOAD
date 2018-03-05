@@ -198,3 +198,11 @@ V1.3
         recongnize(String): void
 
 ```
+
+V1.4
+```java
+问题：
+    未能自动关闭狗门
+处理：
+    将自动关闭狗门功能从Remote中取出，放入DogDoor的open()方法中
+```
